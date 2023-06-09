@@ -28,25 +28,58 @@ class Fornecedor(models.Model):
     cnpj = models.CharField(max_length=18, null=True, blank=True)
     email = models.EmailField(null=False, blank=False)
     
+    def __str__(self):
+        return self.nome
+    
     def formatar_cnpj(self):
         cnpj_formatado = f"{self.cnpj[:2]}.{self.cnpj[2:5]}.{self.cnpj[5:8]}/{self.cnpj[8:12]}-{self.cnpj[12:]}"
         return cnpj_formatado
-
+    
     def formatar_telefone(self):
         telefone_formatado = f"({self.telefone[:2]}) {self.telefone[2:6]}-{self.telefone[6:]}"
         return telefone_formatado
-
-    def __str__(self):
-        return self.nome
 
 class Endereco(models.Model):
     rua = models.CharField(max_length=255, null=False, blank=False)
     numero = models.CharField(max_length=10, null=False, blank=False)
     cidade = models.CharField(max_length=255, null=False, blank=False)
     estado = models.CharField(max_length=2, null=False, blank=False)
-
+    
     def __str__(self):
         return f"{self.rua}, {self.numero}, {self.cidade}/{self.estado}"
+    
+    @staticmethod
+    def get_estados_brasileiros():
+        estados = [
+            ('AC', 'Acre'),
+            ('AL', 'Alagoas'),
+            ('AP', 'Amapá'),
+            ('AM', 'Amazonas'),
+            ('BA', 'Bahia'),
+            ('CE', 'Ceará'),
+            ('DF', 'Distrito Federal'),
+            ('ES', 'Espírito Santo'),
+            ('GO', 'Goiás'),
+            ('MA', 'Maranhão'),
+            ('MT', 'Mato Grosso'),
+            ('MS', 'Mato Grosso do Sul'),
+            ('MG', 'Minas Gerais'),
+            ('PA', 'Pará'),
+            ('PB', 'Paraíba'),
+            ('PR', 'Paraná'),
+            ('PE', 'Pernambuco'),
+            ('PI', 'Piauí'),
+            ('RJ', 'Rio de Janeiro'),
+            ('RN', 'Rio Grande do Norte'),
+            ('RS', 'Rio Grande do Sul'),
+            ('RO', 'Rondônia'),
+            ('RR', 'Roraima'),
+            ('SC', 'Santa Catarina'),
+            ('SP', 'São Paulo'),
+            ('SE', 'Sergipe'),
+            ('TO', 'Tocantins')
+        ]
+        return estados
     
 class Cliente(models.Model):
     nome = models.CharField(max_length=255, null=False, blank=False)
@@ -54,11 +87,16 @@ class Cliente(models.Model):
     telefone = models.CharField(max_length=20, null=False, blank=False)
     cpf = models.CharField(max_length=14, null=True, blank=True)
     email = models.EmailField(null=False, blank=False)
-
+    
     def __str__(self):
         return self.nome
+    
+    def formatar_cpf(cpf):
+        cpf_formatado = f"{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}"
+        return cpf_formatado
 
 
+    
 
 
 

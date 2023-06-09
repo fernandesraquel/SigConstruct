@@ -5,15 +5,21 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h3 class="mb-3">Editar Fornecedor</h3><hr>
-    <div style="width: 40rem;">
+    <div class="row">
+        <div class="col-sm-8">
+            <h2>Editar Fornecedor</h2>
+        </div>
+        <div class="col-sm-4 text-end">
+            <a href="{% url 'listar_fornecedores' %}" class="btn btn-primary btn-sm" style="background-color: #19A7CE; border:none;">Voltar</a> 
+        </div>
+    </div><hr>
     <form method="POST">
         {% csrf_token %}
-        <div class="mb-3">
+        <div class="mb-3 mt-5">
             <label for="nome">Nome</label>
             <input type="text" class="form-control"  value="{{ form_data.nome }}" id="nome" name="nome" required>
         </div>
-        <div class="mb-">
+        <div class="mb-3">
             <label for="cnpj">CNPJ</label>
             <input type="text" class="form-control"  value="{{ form_data.cnpj }}" id="cnpj" name="cnpj" required>
         </div>
@@ -26,7 +32,6 @@
             <input type="email" class="form-control" value="{{ form_data.email }}" id="email" name="email" required>
         </div>
         <input type="submit" value="Salvar" class="btn btn-success" style="background-color: #87af3c; border:none;">
-        <a href="{% url 'listar_fornecedores' %}" class="btn btn-success" style="background-color: #19A7CE; border:none;">Voltar</a>
     </form>
 </div>
   

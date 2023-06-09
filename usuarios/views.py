@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password
-from .models import Funcionario, Usuario, Fornecedor, Cliente
+from .models import Funcionario, Usuario, Fornecedor, Cliente, Endereco
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
@@ -257,3 +257,93 @@ def deletar_fornecedor(request, fornecedor_id):
 
     context = {'fornecedor': fornecedor}
     return render(request, 'fornecedor/deletar_fornecedor.html', context)
+
+
+#======================================================================
+#  CRUD CLIENTES
+
+def cadastrar_cliente(request):
+    estados = Endereco.get_estados_brasileiros()
+    
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        cpf = request.POST.get('cpf')
+        telefone = request.POST.get('telefone')
+        email = request.POST.get('email')
+        rua = request.POST.get('rua')
+        numero = request.POST.get('numero')
+        cidade = request.POST.get('cidade')
+        estado = request.POST.get('estado')
+
+        endereco = Endereco.objects.create(rua=rua, numero=numero, cidade=cidade, estado=estado)
+
+        cliente = Cliente.objects.create(nome=nome, cpf=cpf, telefone=telefone, email=email, endereco=endereco)
+
+        return redirect('listar_clientes')
+    else:
+        return render(request, 'cliente/cadastro_cliente.html', {'estados': estados})
+
+def listar_clientes(request):
+    clientes = Cliente.objects.all()
+    return render(request, 'cliente/listar_clientes.html', {'clientes': clientes})
+
+def editar_cliente(request, cliente_id):
+    cliente = get_object_or_404(Cliente, id=cliente_id)
+    
+    estados = Endereco.get_estados_brasileiros()
+
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        cpf = request.POST.get('cpf')
+        telefone = request.POST.get('telefone')
+        email = request.POST.get('email')
+        rua = request.POST.get('rua')
+        numero = request.POST.get('numero')
+        cidade = request.POST.get('cidade')
+        estado = request.POST.get('estado')
+
+        cliente.nome = nome
+        cliente.cpf = cpf
+        cliente.telefone = telefone
+        cliente.email = email
+        
+        cliente.endereco.rua = rua
+        cliente.endereco.numero = numero
+        cliente.endereco.cidade = cidade
+        cliente.endereco.estado = estado
+
+        cliente.endereco.save()
+        cliente.save()
+
+        return redirect('listar_clientes')
+    else:
+        # Preenche o formulário com os dados do cliente
+        data = {
+            'nome': cliente.nome,
+            'cpf': cliente.cpf,
+            'telefone': cliente.telefone,
+            'email': cliente.email,
+            'rua': cliente.endereco.rua,
+            'numero': cliente.endereco.numero,
+            'cidade': cliente.endereco.cidade,
+            'estado': cliente.endereco.estado
+        }
+
+    # Passar os dados do fornecedor para o template
+    context = {'form_data': data, 'estados': estados} 
+    return render(request, 'cliente/editar_cliente.html', context)
+
+
+def deletar_cliente(request, cliente_id):
+    cliente = get_object_or_404(Cliente, id=cliente_id)
+    
+    if request.method == 'POST': 
+        cliente.endereco.delete()
+        cliente.delete()
+        return redirect('listar_clientes')
+
+    context = {'cliente': cliente}
+    return render(request, 'cliente/deletar_cliente.html', context)
+
+
+    
