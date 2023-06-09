@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}{% endblock header %}
+
+{% block content %}
+<div class="container mt-5">
+    <h3 class="mb-3">Cadastrar Fornecedor</h3><hr>
+    <div style="width: 40rem;">
+    <form method="POST" action="{% url 'cadastrar_fornecedor' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" required>
+        </div>
+        <div class="mb-">
+            <label for="cnpj">CNPJ</label>
+            <input type="text" class="form-control" id="cnpj" name="cnpj" required>
+        </div>
+        <div class="mb-3">
+            <label for="telefone">Telefone</label>
+            <input type="number" class="form-control" id="telefone" name="telefone" required>
+        </div>
+        <div class="mb-3">
+            <label for="email">E-mail</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <input type="submit" value="Cadastrar" class="btn btn-success" style="background-color: #87af3c; border:none;">
+        <a href="{% url 'listar_fornecedores' %}" class="btn btn-success" style="background-color: #19A7CE; border:none;">Voltar</a>
+    </form>
+</div>
+  
+{% endblock  %}
