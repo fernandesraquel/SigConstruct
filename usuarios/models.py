@@ -30,14 +30,6 @@ class Fornecedor(models.Model):
     
     def __str__(self):
         return self.nome
-    
-    def formatar_cnpj(self):
-        cnpj_formatado = f"{self.cnpj[:2]}.{self.cnpj[2:5]}.{self.cnpj[5:8]}/{self.cnpj[8:12]}-{self.cnpj[12:]}"
-        return cnpj_formatado
-    
-    def formatar_telefone(self):
-        telefone_formatado = f"({self.telefone[:2]}) {self.telefone[2:6]}-{self.telefone[6:]}"
-        return telefone_formatado
 
 class Endereco(models.Model):
     rua = models.CharField(max_length=255, null=False, blank=False)
@@ -91,9 +83,11 @@ class Cliente(models.Model):
     def __str__(self):
         return self.nome
     
-    def formatar_cpf(cpf):
-        cpf_formatado = f"{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}"
-        return cpf_formatado
+
+    
+    
+    
+    
 
 
     

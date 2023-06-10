@@ -36,8 +36,8 @@
         {% for fornecedor in fornecedores %}
         <tr>
             <th>{{ fornecedor.nome }}</th>
-            <td>{{fornecedor.formatar_cnpj }}</td>
-            <td>{{ fornecedor.formatar_telefone }}</td>
+            <td>{{fornecedor.cnpj }}</td>
+            <td>{{ fornecedor.telefone }}</td>
             <td>{{ fornecedor.email }}</td>   
             <td class="text-center">
                 <a href="{% url 'editar_fornecedor' fornecedor.id %}" class="btn btn-sm" style="color:#fff;"><i class='bx bxs-edit-alt' style='color:#1e1c1c;' title"editar"></i></a>
