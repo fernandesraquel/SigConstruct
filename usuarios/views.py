@@ -206,7 +206,7 @@ def cadastrar_fornecedor(request):
         fornecedor = Fornecedor(nome=nome, telefone=telefone,  cnpj=cnpj, email=email)
         fornecedor.save()
         
-        return redirect('logado')
+        return redirect('listar_fornecedores')
 
     elif request.method == 'GET':
         return render(request, 'fornecedor/cadastro_fornecedor.html')

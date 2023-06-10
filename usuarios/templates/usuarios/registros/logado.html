@@ -25,8 +25,32 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'listar_clientes' %}">Clientes</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Produtos</a>
+                    <li class="nav-item dropdown">   
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-mdb-toggle="dropdown" aria-expanded="false">
+                            Produtos
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'nova_compra' %}">Nova Compra</a></li>
+                            <li><a class="dropdown-item" href="{% url 'listar_compras' %}">Listar Compras</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'listar_produtos' %}">Listar Produtos</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'listar_categorias' %}">Listar Categorias</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">   
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-mdb-toggle="dropdown" aria-expanded="false">
+                            Estoque
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="">Registrar Entrada</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="">Registrar Saída</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Vendas</a>

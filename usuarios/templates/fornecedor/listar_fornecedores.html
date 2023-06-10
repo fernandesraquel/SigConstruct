@@ -49,9 +49,10 @@
     </tbody>
     </table>
     {% else %}
-        <div class="text-center mt-5 mb-5 jumbotron">
-            <h5>Nenhum <code>Fornecedor</code> cadastrado ainda.</h5>
-        </div>
+    <div class="text-center mt-5 mb-5 jumbotron">
+        <h5>Nenhum <code>Fornecedor</code> cadastrado ainda.</h5></br>
+        <a href="{% url 'cadastrar_fornecedor' %}" class="btn btn-primary btn-sm" style="background-color: #87af3c; border:none;">Cadastrar</a>
+    </div>
     {% endif %}
 </div>
 

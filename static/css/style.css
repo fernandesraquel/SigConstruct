@@ -12,3 +12,9 @@ html {
 .destaque {
     color: #87af3c;
 }
+
+.produto-imagem {
+    width: 100px;  /* Largura desejada */
+    height: 100px; /* Altura desejada */
+    object-fit: cover; /* Redimensionar a imagem para preencher o contêiner mantendo a proporção */
+  }
